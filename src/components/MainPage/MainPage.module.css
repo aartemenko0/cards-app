@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    max-width: 300px;
+    margin: 20px;
+}
+
+.button {
+    background-color: rgb(202, 225, 202);
+    border-radius: 25px;
+    color: rgb(52, 120, 97);
+}
