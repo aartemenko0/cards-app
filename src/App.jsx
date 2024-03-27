@@ -1,15 +1,14 @@
-import React from 'react';
-import './App.css';
-import MainPage from './components/MainPage/MainPage';
-import Table from './components/Table/Table';
+import React from "react";
+import Table from "./components/Table/Table";
+import Slider from "./components/Slider/Slider";
 
 function App() {
-    return (
-        <div className="App">
-            <MainPage/>
-            <Table/>
-        </div>
-    );
+  return (
+    <div className="App">
+      <Slider />
+      <Table />
+    </div>
+  );
 }
 
 export default App;
