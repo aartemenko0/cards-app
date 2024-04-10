@@ -1,0 +1,43 @@
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #bcb3b3; /* Цвет фона хедера */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Тень хедера */
+  z-index: 1000; /* Уровень слоя хедера */
+  display: flex;
+  align-items: center;
+  margin-bottom: 100px;
+}
+
+.header__container {
+  margin-bottom: 100px;
+}
+
+img {
+  width: 250px;
+  height: 65px;
+}
+
+nav {
+  margin-left: auto; /* Помещает навигацию вправо */
+  font-family: 'Ubuntu';
+}
+
+/* Стили для списка ссылок */
+ul {
+  list-style: none; /* Убираем маркеры списка */
+  display: flex;
+}
+
+/* Стили для элементов списка (ссылок) */
+li {
+  margin-right: 20px; /* Отступ между ссылками */
+}
+
+/* Стили для ссылок */
+a {
+  text-decoration: none; /* Убираем дефолтное подчеркивание */
+  color: inherit; /* Наследуем цвет текста от родительского элемента */
+}

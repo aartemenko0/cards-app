@@ -1,23 +1,27 @@
 .tableContainer {
   display: flex;
   justify-content: center;
-  border: 2px solid purple;
-  width: fit-content;
   align-items: center;
-  margin: 0 auto;
   padding: 20px;
+  height: 80vh;
+  margin-top: 200px;
 }
 
 .table {
-  width: calc(60% - 40px);
+  width: 60%;
   margin: 0 auto;
+  margin-bottom: 200px;
+  border: 2px solid purple;
+  border-collapse: collapse;
 }
 
-.tableCell,
-.tableHead,
-.tableRow {
-  padding: 10px;
+th,
+td {
+  padding: 10px; /* Отступ внутри ячеек */
+  border: 1px solid #ddd; /* Граница ячеек */
+  text-align: left; /* Выравнивание текста в ячейках */
 }
+
 .tableRow:nth-child(even) {
   background-color: #f2f2f2;
 }
