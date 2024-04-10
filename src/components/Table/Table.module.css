@@ -8,7 +8,7 @@
 }
 
 .table {
-  width: 60%;
+  /* width: 60%; */
   margin: 0 auto;
   margin-bottom: 200px;
   border: 2px solid purple;
@@ -28,4 +28,10 @@ td {
 
 .button {
   margin-right: 10px;
+  width: 150px; /* Устанавливаем одинаковую ширину для всех кнопок */
+  background-color: #f16b64; /* Устанавливаем цвет фона кнопок */
+  padding: 10px; /* Отступ внутри кнопок */
+  border: none; /* Убираем границу */
+  cursor: pointer; /* Делаем курсор указателем при наведении */
+  color: black;
 }
