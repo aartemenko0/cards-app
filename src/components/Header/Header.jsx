@@ -21,7 +21,7 @@ export default function Header() {
             <Link to="/">Главная</Link> {/* Ссылка на главную страницу */}
           </li>
           <li>
-            <Link to="/link3">Ссылка 3</Link>
+            <Link to="*">New</Link>
           </li>
         </ul>
       </nav>

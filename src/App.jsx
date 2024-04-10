@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import React from "react";
 import Table from "./components/Table/Table";
 import Slider from "./components/pages/Slider/Slider.jsx";
-import styles from "./App.css";
+import NotFoundPage from "./components/pages/NotFoundPage/NotFoundPage.jsx";
 
 function App() {
   return (
@@ -11,7 +11,8 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Table />} />
-        <Route path="/game" element={<Slider />} />{" "}
+        <Route path="/game" element={<Slider />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
   );
