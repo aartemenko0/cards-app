@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import MainPage from "../MainPage/MainPage";
-import SliderButtons from "../../SliderButtons/SliderButtons";
-import data from "../../../data/data";
+import SliderButtons from "../../components/SliderButtons/SliderButtons";
+import data from "../../data/data";
 import styles from "./Slider.module.css";
 
 const Slider = () => {

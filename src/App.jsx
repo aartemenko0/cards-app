@@ -1,19 +1,23 @@
 import Header from "./components/Header/Header.jsx";
 import { Route, Routes } from "react-router-dom";
 import React from "react";
+import styles from "./App.module.css";
 import Table from "./components/Table/Table";
-import Slider from "./components/pages/Slider/Slider.jsx";
-import NotFoundPage from "./components/pages/NotFoundPage/NotFoundPage.jsx";
+import Slider from "./pages/Slider/Slider.jsx";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage.jsx";
+import { WordProvider } from "./context/WordContext";
 
 function App() {
   return (
-    <div className="App">
+    <div className={styles.App}>
       <Header />
-      <Routes>
-        <Route path="/" element={<Table />} />
-        <Route path="/game" element={<Slider />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+      <WordProvider>
+        <Routes>
+          <Route path="/" element={<Table />} />
+          <Route path="/game" element={<Slider />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </WordProvider>
     </div>
   );
 }

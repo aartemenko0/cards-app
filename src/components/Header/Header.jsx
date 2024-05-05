@@ -5,10 +5,10 @@ import logo from "../../images/logo-no-background.png";
 
 export default function Header() {
   return (
-    <header>
-      <div className={styles.header__logo}>
+    <header className={styles.header}>
+      <div>
         <Link to="/">
-          <img src={logo} alt="logo" className={styles.logo} />
+          <img src={logo} alt="logo" />
         </Link>
       </div>
       <nav>

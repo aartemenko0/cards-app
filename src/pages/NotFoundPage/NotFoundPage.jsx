@@ -1,7 +1,7 @@
 import styles from "./NotFoundPage.module.css";
 import { Link } from "react-router-dom";
-import Button from "../../Button/Button";
-import Cat404 from "../../../images/cat404.png";
+import Button from "../../components/Button/Button";
+import Cat404 from "../../images/cat404.png";
 
 export default function NotFoundPage() {
   return (
