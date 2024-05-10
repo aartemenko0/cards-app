@@ -29,6 +29,7 @@ export default function TableComponent() {
             <th>English</th>
             <th>Transcription</th>
             <th>Translation</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
