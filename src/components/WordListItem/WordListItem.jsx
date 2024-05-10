@@ -2,13 +2,18 @@ import React, { useState } from "react";
 import Button from "../Button/Button";
 import styles from "./WordListItem.module.css";
 
-const WordListItem = ({ word }) => {
-  // Принимаем объект слова в качестве свойства
+const WordListItem = ({ word, onDelete }) => {
   const [isEdited, setIsEdited] = useState(false);
   const [values, setValues] = useState({
     english: word.english,
     transcription: word.transcription,
     russian: word.russian,
+  });
+
+  const [inputErrors, setInputErrors] = useState({
+    english: false,
+    transcription: false,
+    russian: false,
   });
 
   function handleEdit(event) {
@@ -17,10 +22,21 @@ const WordListItem = ({ word }) => {
         setIsEdited(true);
         break;
       case "save":
-        setIsEdited(false);
+        if (
+          !inputErrors.english &&
+          !inputErrors.transcription &&
+          !inputErrors.russian &&
+          values.english.trim() !== "" &&
+          values.transcription.trim() !== "" &&
+          values.russian.trim() !== ""
+        ) {
+          setIsEdited(false);
+        } else {
+          alert("Fill in all fields before saving.");
+        }
         break;
       case "delete":
-        console.log("Кнопка удалить пока не рабочая!!!");
+        handleDelete();
         break;
       default:
         console.log("Неизвестная команда");
@@ -34,7 +50,16 @@ const WordListItem = ({ word }) => {
       ...prevValues,
       [name]: value,
     }));
+
+    setInputErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: value.trim() === "",
+    }));
   }
+
+  const handleDelete = () => {
+    onDelete(word.id);
+  };
 
   return (
     <tr onClick={handleEdit}>
@@ -43,7 +68,7 @@ const WordListItem = ({ word }) => {
         {isEdited ? (
           <input
             type="text"
-            className={styles.input}
+            className={`${styles.input} ${inputErrors.english && styles.error}`}
             name="english"
             value={values.english}
             onChange={handleChange}
@@ -56,7 +81,9 @@ const WordListItem = ({ word }) => {
         {isEdited ? (
           <input
             type="text"
-            className={styles.input}
+            className={`${styles.input} ${
+              inputErrors.transcription && styles.error
+            }`}
             name="transcription"
             value={values.transcription}
             onChange={handleChange}
@@ -69,7 +96,7 @@ const WordListItem = ({ word }) => {
         {isEdited ? (
           <input
             type="text"
-            className={styles.input}
+            className={`${styles.input} ${inputErrors.russian && styles.error}`}
             name="russian"
             value={values.russian}
             onChange={handleChange}
@@ -79,8 +106,23 @@ const WordListItem = ({ word }) => {
         )}
       </td>
       <td className={styles.buttons}>
-        {isEdited ? <Button text="save" /> : <Button text="edit" />}
-        <Button text="delete" />
+        {isEdited ? (
+          <Button
+            text="save"
+            disabled={
+              inputErrors.english ||
+              inputErrors.transcription ||
+              inputErrors.russian ||
+              values.english.trim() === "" ||
+              values.transcription.trim() === "" ||
+              values.russian.trim() === ""
+            }
+            onClick={handleEdit}
+          />
+        ) : (
+          <Button text="edit" onClick={handleEdit} />
+        )}
+        <Button text="delete" onClick={handleDelete} />
       </td>
     </tr>
   );
