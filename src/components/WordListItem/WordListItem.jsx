@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "../Button/Button";
 import styles from "./WordListItem.module.css";
 
-const WordListItem = ({ word, onDelete }) => {
+export default function WordListItem({ word, onDelete }) {
   const [isEdited, setIsEdited] = useState(false);
   const [values, setValues] = useState({
     english: word.english,
@@ -63,12 +63,12 @@ const WordListItem = ({ word, onDelete }) => {
 
   return (
     <tr onClick={handleEdit}>
-      <td className={styles.item}>{word.tags}</td>
-      <td className={styles.item}>
+      <td>{word.tags}</td>
+      <td>
         {isEdited ? (
           <input
             type="text"
-            className={`${styles.input} ${inputErrors.english && styles.error}`}
+            className={`${inputErrors.english && styles.error}`}
             name="english"
             value={values.english}
             onChange={handleChange}
@@ -77,13 +77,11 @@ const WordListItem = ({ word, onDelete }) => {
           values.english
         )}
       </td>
-      <td className={styles.item}>
+      <td>
         {isEdited ? (
           <input
             type="text"
-            className={`${styles.input} ${
-              inputErrors.transcription && styles.error
-            }`}
+            className={`${inputErrors.transcription && styles.error}`}
             name="transcription"
             value={values.transcription}
             onChange={handleChange}
@@ -92,11 +90,11 @@ const WordListItem = ({ word, onDelete }) => {
           values.transcription
         )}
       </td>
-      <td className={styles.item}>
+      <td>
         {isEdited ? (
           <input
             type="text"
-            className={`${styles.input} ${inputErrors.russian && styles.error}`}
+            className={`${inputErrors.russian && styles.error}`}
             name="russian"
             value={values.russian}
             onChange={handleChange}
@@ -105,7 +103,7 @@ const WordListItem = ({ word, onDelete }) => {
           values.russian
         )}
       </td>
-      <td className={styles.buttons}>
+      <td>
         {isEdited ? (
           <Button
             text="save"
@@ -126,6 +124,4 @@ const WordListItem = ({ word, onDelete }) => {
       </td>
     </tr>
   );
-};
-
-export default WordListItem;
+}

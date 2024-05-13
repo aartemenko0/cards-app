@@ -15,10 +15,9 @@ export default function Header() {
         <ul>
           <li>
             <Link to="/game">Слайдер</Link>{" "}
-            {/* Ссылка на страницу со слайдером */}
           </li>
           <li>
-            <Link to="/">Главная</Link> {/* Ссылка на главную страницу */}
+            <Link to="/">Главная</Link>
           </li>
           <li>
             <Link to="*">New</Link>

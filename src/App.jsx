@@ -7,7 +7,7 @@ import Slider from "./pages/Slider/Slider.jsx";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage.jsx";
 import { WordProvider } from "./context/WordContext";
 
-function App() {
+export default function App() {
   return (
     <div className={styles.App}>
       <Header />
@@ -21,5 +21,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

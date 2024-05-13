@@ -25,17 +25,3 @@ td {
   border: 1px solid #ddd;
   text-align: left;
 }
-
-.tableRow:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-.button {
-  margin-right: 10px;
-  width: 150px;
-  background-color: #f16b64;
-  padding: 10px;
-  border: none;
-  cursor: pointer;
-  color: black;
-}

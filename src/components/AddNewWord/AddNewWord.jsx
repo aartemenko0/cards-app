@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./AddNewWord.module.css";
 
-const AddNewWord = ({ onAdd }) => {
+export default function AddNewWord({ onAdd }) {
   const [english, setEnglish] = useState("");
   const [transcription, setTranscription] = useState("");
   const [russian, setRussian] = useState("");
@@ -67,7 +67,7 @@ const AddNewWord = ({ onAdd }) => {
         Add New
       </button>
       {addedWord && (
-        <div className={styles.addedWord}>
+        <div>
           <b>You've added a new word:</b>
           <br /> English: {addedWord.english}
           <br /> Transcription: {addedWord.transcription}
@@ -76,6 +76,4 @@ const AddNewWord = ({ onAdd }) => {
       )}
     </div>
   );
-};
-
-export default AddNewWord;
+}
