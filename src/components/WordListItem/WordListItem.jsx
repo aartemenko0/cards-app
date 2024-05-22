@@ -2,49 +2,38 @@ import React, { useState } from "react";
 import Button from "../Button/Button";
 import styles from "./WordListItem.module.css";
 
-export default function WordListItem({ word, onDelete }) {
+export default function WordListItem({ word, onEdit, onDelete }) {
   const [isEdited, setIsEdited] = useState(false);
   const [values, setValues] = useState({
-    english: word.english,
-    transcription: word.transcription,
-    russian: word.russian,
+    english: word?.english?.trim() || "",
+    transcription: word?.transcription?.trim() || "",
+    russian: word?.russian?.trim() || "",
   });
 
   const [inputErrors, setInputErrors] = useState({
-    english: false,
-    transcription: false,
-    russian: false,
+    english: !word?.english?.trim(),
+    transcription: !word?.transcription?.trim(),
+    russian: !word?.russian?.trim(),
   });
 
-  function handleEdit(event) {
-    switch (event.target.innerText) {
-      case "edit":
-        setIsEdited(true);
-        break;
-      case "save":
-        if (
-          !inputErrors.english &&
-          !inputErrors.transcription &&
-          !inputErrors.russian &&
-          values.english.trim() !== "" &&
-          values.transcription.trim() !== "" &&
-          values.russian.trim() !== ""
-        ) {
-          setIsEdited(false);
-        } else {
-          alert("Fill in all fields before saving.");
-        }
-        break;
-      case "delete":
-        handleDelete();
-        break;
-      default:
-        console.log("Неизвестная команда");
+  const handleEdit = (event) => {
+    if (isEdited) {
+      if (
+        !inputErrors.english &&
+        !inputErrors.transcription &&
+        !inputErrors.russian
+      ) {
+        onEdit(word.id, values);
+        setIsEdited(false);
+      } else {
+        alert("Fill in all fields before saving.");
+      }
+    } else {
+      setIsEdited(true);
     }
-  }
+  };
 
-  // Функция для обновления значений в состоянии при изменении полей ввода
-  function handleChange(event) {
+  const handleChange = (event) => {
     const { name, value } = event.target;
     setValues((prevValues) => ({
       ...prevValues,
@@ -53,16 +42,37 @@ export default function WordListItem({ word, onDelete }) {
 
     setInputErrors((prevErrors) => ({
       ...prevErrors,
-      [name]: value.trim() === "",
+      [name]: !value.trim(),
     }));
-  }
+  };
 
   const handleDelete = () => {
     onDelete(word.id);
   };
 
+  // Проверка наличия объекта word
+  if (!word) {
+    return (
+      <tr>
+        <td colSpan="5">Word is missing</td>
+      </tr>
+    );
+  }
+
+  // Проверка наличия и корректности необходимых полей
+  const hasValidFields =
+    word.english?.trim() && word.transcription?.trim() && word.russian?.trim();
+
+  if (!hasValidFields) {
+    return (
+      <tr>
+        <td colSpan="5">Word data is incomplete</td>
+      </tr>
+    );
+  }
+
   return (
-    <tr onClick={handleEdit}>
+    <tr>
       <td>{word.tags}</td>
       <td>
         {isEdited ? (
@@ -111,9 +121,9 @@ export default function WordListItem({ word, onDelete }) {
               inputErrors.english ||
               inputErrors.transcription ||
               inputErrors.russian ||
-              values.english.trim() === "" ||
-              values.transcription.trim() === "" ||
-              values.russian.trim() === ""
+              !values.english.trim() ||
+              !values.transcription.trim() ||
+              !values.russian.trim()
             }
             onClick={handleEdit}
           />

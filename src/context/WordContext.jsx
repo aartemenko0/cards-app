@@ -1,23 +1,28 @@
+// WordContext.js
 import React, { createContext, useState, useContext } from "react";
 
 export const WordContext = createContext();
 
 export const WordProvider = ({ children }) => {
-  const [learnedWords, setLearnedWords] = useState([]);
-  const [learnedCount, setLearnedCount] = useState(0); // Добавляем состояние для отслеживания количества изученных слов
+  const [words, setWords] = useState([]);
 
-  const toggleLearned = (word) => {
-    if (!learnedWords.some((w) => w.english === word.english)) {
-      setLearnedWords((prevWords) => [...prevWords, word]);
-      setLearnedCount((prevCount) => prevCount + 1); // Увеличиваем счетчик при изучении нового слова
-    }
+  const addWord = (newWord) => {
+    setWords([...words, newWord]);
+  };
+
+  const editWord = (id, updatedWord) => {
+    setWords(words.map((word) => (word.id === id ? updatedWord : word)));
+  };
+
+  const deleteWord = (id) => {
+    setWords(words.filter((word) => word.id !== id));
   };
 
   const value = {
-    learnedWords,
-    setLearnedWords,
-    toggleLearned,
-    learnedCount, // Добавляем счетчик изученных слов в контекст
+    words,
+    addWord,
+    editWord,
+    deleteWord,
   };
 
   return <WordContext.Provider value={value}>{children}</WordContext.Provider>;
