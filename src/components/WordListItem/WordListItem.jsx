@@ -5,15 +5,16 @@ import styles from "./WordListItem.module.css";
 export default function WordListItem({ word, onEdit, onDelete }) {
   const [isEdited, setIsEdited] = useState(false);
   const [values, setValues] = useState({
-    english: word?.english?.trim() || "",
-    transcription: word?.transcription?.trim() || "",
-    russian: word?.russian?.trim() || "",
+    english: word.english || "",
+    transcription: word.transcription || "",
+    russian: word.russian || "",
+    tags: word.tags || "",
   });
 
   const [inputErrors, setInputErrors] = useState({
-    english: !word?.english?.trim(),
-    transcription: !word?.transcription?.trim(),
-    russian: !word?.russian?.trim(),
+    english: !word.english,
+    transcription: !word.transcription,
+    russian: !word.russian,
   });
 
   const handleEdit = (event) => {
@@ -59,11 +60,8 @@ export default function WordListItem({ word, onEdit, onDelete }) {
     );
   }
 
-  // Проверка наличия и корректности необходимых полей
-  const hasValidFields =
-    word.english?.trim() && word.transcription?.trim() && word.russian?.trim();
-
-  if (!hasValidFields) {
+  // Проверка наличия необходимых полей
+  if (!word.english || !word.transcription || !word.russian) {
     return (
       <tr>
         <td colSpan="5">Word data is incomplete</td>
