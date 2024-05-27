@@ -1,20 +1,24 @@
-import styles from "./Table.module.css";
-import React, { useState } from "react";
-import data from "../../data/data";
+import React, { useContext } from "react";
 import WordListItem from "../WordListItem/WordListItem";
 import AddNewWord from "../AddNewWord/AddNewWord";
+import styles from "./Table.module.css";
 
-export default function TableComponent() {
-  const [words, setWords] = useState([]);
+import { WordContext } from "../../context/WordContext";
 
-  const handleAddNewWord = (newWord) => {
-    newWord.id = Math.random().toString(36).substring(7);
-    setWords([...words, newWord]);
+export const TableComponent = () => {
+  const { words, addWord, updateWord, deleteWord } = useContext(WordContext);
+
+  const handleAddNewWord = async (newWord) => {
+    console.log("newWord", newWord);
+    addWord(newWord);
   };
 
-  const handleDeleteWord = (id) => {
-    const updatedWords = words.filter((word) => word.id !== id);
-    setWords(updatedWords);
+  const handleUpdateWord = async (id, updatedWord) => {
+    updateWord(id, updatedWord);
+  };
+
+  const handleDeleteWord = async (id) => {
+    deleteWord(id);
   };
 
   return (
@@ -33,10 +37,11 @@ export default function TableComponent() {
           </tr>
         </thead>
         <tbody>
-          {data.concat(words).map((word) => (
+          {words.map((word, index) => (
             <WordListItem
-              key={word.id}
+              key={word.id || index}
               word={word}
+              onEdit={handleUpdateWord}
               onDelete={handleDeleteWord}
             />
           ))}
@@ -44,4 +49,4 @@ export default function TableComponent() {
       </table>
     </div>
   );
-}
+};

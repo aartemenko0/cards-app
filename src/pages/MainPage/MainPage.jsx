@@ -1,11 +1,11 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { Card, CardContent, Typography, Button } from "@mui/material";
-import { useWordContext } from "../../context/WordContext";
+import { WordContext } from "../../context/WordContext";
 import styles from "./MainPage.module.css";
 
 const MainPage = ({ word }) => {
   const [showTranslation, setShowTranslation] = useState(false);
-  const { toggleLearned, learnedCount } = useWordContext();
+  const { toggleLearned, learnedCount } = useContext(WordContext);
   const translationButtonRef = useRef(null);
 
   useEffect(() => {
